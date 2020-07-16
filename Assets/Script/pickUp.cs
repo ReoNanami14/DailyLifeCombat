@@ -7,14 +7,24 @@ public class pickUp : MonoBehaviour
     public Transform theDest;
     Rigidbody rb;
     public float speed;
-    
+
+    //追加
+    public AudioClip holdSE;
+    public AudioClip throwSE;
+    //public AudioClip destroySE;
+
+    AudioSource aud;
 
 
-     void Start()
+    void Start()
     {
 
-        rb=GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         //dest = GameObject.Find("Destination");
+
+        //new
+        this.aud = GetComponent<AudioSource>();
+
     }
     void Update()
     {
@@ -29,26 +39,34 @@ public class pickUp : MonoBehaviour
             this.transform.position = theDest.position;
             this.transform.parent = GameObject.Find("Destination").transform;
             this.transform.eulerAngles = theDest.transform.eulerAngles;
+
+            //new
+            this.aud.PlayOneShot(this.holdSE);
+
         }
-        if (Input.GetKeyDown("r")  )
+        if (Input.GetKeyDown("r"))
         {
             this.rb.useGravity = true;
             this.transform.parent = null;
         }
 
 
-        if (Input.GetMouseButtonDown(0)&&this.transform.position.y>=5.5)
+        if (Input.GetMouseButtonDown(0) && this.transform.position.y >= 5.5)
         {
             this.transform.parent = null;
             this.rb.useGravity = true;
-            this.rb.AddForce(transform.forward*speed);
+            this.rb.AddForce(transform.forward * speed);
+
+            //new
+            this.aud.PlayOneShot(this.throwSE);
         }
 
         if (this.transform.position.y < 0)
         {
             Destroy(gameObject);
+
         }
     }
 
-     
+
 }

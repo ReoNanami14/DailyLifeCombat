@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour
 
     CapsuleCollider caps;
 
+    public AudioClip jumpSE;
+
+    AudioSource aud;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +40,8 @@ public class PlayerController : MonoBehaviour
         caps.center = new Vector3(0, 0.76f, 0);
         caps.radius = 0.23f;
         caps.height = 1.5f;
+
+        this.aud = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -76,6 +81,8 @@ public class PlayerController : MonoBehaviour
         {
             this.rb.AddForce(transform.up*this.jumpForce);
             this.animator.SetTrigger("isJump");
+
+            this.aud.PlayOneShot(this.jumpSE);
         }
 
         //前移動のときだけ方向転換させる
