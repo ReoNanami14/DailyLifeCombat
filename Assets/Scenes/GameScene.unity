@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -156,8 +156,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   theDest: {fileID: 1019354675}
   speed: 1500
-  holdSE: {fileID: 8300000, guid: eed2451bbd4264da8b6c27c92df62faf, type: 3}
-  throwSE: {fileID: 8300000, guid: 687990b2a12cc4b6db34fdeceb9b8636, type: 3}
+  holdSE: {fileID: 0}
+  throwSE: {fileID: 0}
 --- !u!54 &111065119
 Rigidbody:
   m_ObjectHideFlags: 0
