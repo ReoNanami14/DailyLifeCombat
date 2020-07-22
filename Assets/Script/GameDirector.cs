@@ -25,16 +25,24 @@ public class GameDirector : MonoBehaviour
 
     public void DecreaseHp()
     {
-        this.hpGage.GetComponent<Image>().fillAmount -= 0.1f;
+        this.hpGage.GetComponent<Image>().fillAmount -= 0.5f;
     }
     public void DecreaseHp2()
     {
-        this.hpGage2.GetComponent<Image>().fillAmount -= 0.1f;
+        this.hpGage2.GetComponent<Image>().fillAmount -= 0.5f;
     }
 
     public void YouWin()
     {
         if (this.hpGage.GetComponent<Image>().fillAmount == 0.0f)
+        {
+            this.win.GetComponent<Text>().text = "You Win!!";
+        }        
+    }
+
+    public void YouWin2()
+    {
+        if (this.hpGage2.GetComponent<Image>().fillAmount == 0.0f)
         {
             this.win.GetComponent<Text>().text = "You Win!!";
         }
