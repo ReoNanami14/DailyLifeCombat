@@ -33,7 +33,7 @@ public class pickUp : MonoBehaviour
         Vector3 dir = p1 - p2;
         float d = dir.magnitude;
 
-        if (Input.GetKeyDown("e") && d < 2)
+        if (Input.GetKeyDown("e") && d < 3)
         {
             this.rb.useGravity = false;
             this.transform.position = theDest.position;

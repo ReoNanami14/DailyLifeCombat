@@ -55,7 +55,7 @@ public class player2 : MonoBehaviour
         if (other.gameObject.tag == "item")
         {
             GameObject director = GameObject.Find("GameDirector");
-            director.GetComponent<GameDirector>().DecreaseHp();
+            director.GetComponent<GameDirector>().DecreaseHp2();
             director.GetComponent<GameDirector>().YouWin();
         }
     }
