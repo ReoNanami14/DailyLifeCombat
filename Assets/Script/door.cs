@@ -23,16 +23,17 @@ public class door : MonoBehaviour
         Vector3 dir = p1 - p2;
         float d = dir.magnitude;
 
-        if (Input.GetKeyDown("e") && d < 2)
-        {
-            this.rb.useGravity = false;
-            this.transform.position = theDest.position;
-            this.transform.parent = GameObject.Find("Destination").transform;
-            this.transform.eulerAngles = theDest.transform.eulerAngles;
-        }
+        //if (Input.GetKeyDown("e") && d < 2)
+        //{
+            //this.rb.useGravity = false;
+            //this.transform.position = theDest.position;
+           // this.transform.parent = GameObject.Find("Destination").transform;
+           // this.transform.eulerAngles = theDest.transform.eulerAngles;
+        //}
         if (Input.GetKeyDown("r"))
         {
             this.rb.useGravity = true;
+            this.rb.isKinematic = true;
             this.transform.parent = null;
         }
 

@@ -21,11 +21,24 @@ public class player2 : MonoBehaviour
     Rigidbody rb;
 
     CapsuleCollider caps;
+
+    GameObject theDest;
+
+    AudioSource aud;
+    public AudioClip jumpSE;
+    public AudioClip holdSE;
+
+    public float distance = 10f;
+    public Transform equipPosition;
+    GameObject currentItem;
+    bool canGrab;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         this.animator = GetComponent<Animator>();
+        theDest = GameObject.Find("Destination");
 
         rb.constraints = RigidbodyConstraints.FreezeRotation;
 
@@ -33,13 +46,15 @@ public class player2 : MonoBehaviour
         caps.center = new Vector3(0, 0.76f, 0);
         caps.radius = 0.23f;
         caps.height = 1.5f;
+
+        this.aud = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float x = Input.GetAxisRaw("LXaxis") * Time.deltaTime * speed;
-        float z = Input.GetAxisRaw("LYaxis") * Time.deltaTime * speed;
+        float x = Input.GetAxisRaw("Horizontal1") * Time.deltaTime * speed;
+        float z = Input.GetAxisRaw("Vertical1") * Time.deltaTime * speed;
 
         //前移動のときだけ方向転換させる
         if (z > 0)
@@ -48,15 +63,62 @@ public class player2 : MonoBehaviour
         }
 
         transform.position += transform.forward * z + transform.right * x;
+
+        if (Input.GetKeyDown(KeyCode.Joystick3Button1))
+        {
+            this.rb.AddForce(transform.up * this.jumpForce);
+            this.animator.SetTrigger("isJump");
+
+            this.aud.PlayOneShot(this.jumpSE);
+        }
+
+        CheckGrab();
+
+        if (canGrab)
+        {
+            if (Input.GetKeyDown(KeyCode.Joystick3Button0))
+            {
+                PickUp();
+                this.aud.PlayOneShot(this.holdSE);
+            }
+        }
     }
 
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "item")
+            if (other.gameObject.tag == "item" )
+            {
+                GameObject director = GameObject.Find("GameDirector");
+                director.GetComponent<GameDirector>().YouWin2();
+            }
+        
+    }
+
+    private void CheckGrab()
+    {
+        Ray ray = new Ray(transform.position + new Vector3(0, 0.15f, 0), transform.forward);
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, distance))
         {
-            GameObject director = GameObject.Find("GameDirector");
-            director.GetComponent<GameDirector>().DecreaseHp2();
-            director.GetComponent<GameDirector>().YouWin2();
+            if (hit.transform.tag == "item")
+            {
+                currentItem = hit.transform.gameObject;
+                canGrab = true;
+            }
+
         }
+        else
+            canGrab = false;
+        Debug.DrawRay(ray.origin, ray.direction * distance, Color.red);
+    }
+
+    private void PickUp()
+    {
+        currentItem.transform.position = equipPosition.position;
+        currentItem.transform.parent = equipPosition;
+        currentItem.transform.localEulerAngles = equipPosition.transform.localEulerAngles;
+        currentItem.GetComponent<Rigidbody>().isKinematic = true;
     }
 }
