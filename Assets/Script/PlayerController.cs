@@ -139,9 +139,11 @@ public class PlayerController : MonoBehaviour
         }
         else
             canGrab = false;
+        //Raycastの可視化
         Debug.DrawRay(ray.origin, ray.direction * distance, Color.red);
     }
 
+    //実際にアイテムを持つ
     private void PickUp()
     {
         currentItem.transform.position = equipPosition.position;
