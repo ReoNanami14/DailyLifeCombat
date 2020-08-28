@@ -48,7 +48,7 @@ public class Axis2 : MonoBehaviour
         //cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, cam.transform.localPosition.z + scroll);
 
         //Cameraの角度にマウスからとった値を入れる
-        transform.eulerAngles += new Vector3(Input.GetAxis("Vertical2") * rotate_speed, Input.GetAxis("Horizontal2") * rotate_speed, 0);
+        transform.eulerAngles += new Vector3(Input.GetAxis("Vertical1") * rotate_speed, Input.GetAxis("Horizontal1") * rotate_speed, 0);
 
         //X軸の角度
         float angleX = transform.eulerAngles.x;

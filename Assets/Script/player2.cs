@@ -32,6 +32,7 @@ public class player2 : MonoBehaviour
     public Transform equipPosition;
     GameObject currentItem;
     bool canGrab;
+    bool isJumping = false;
 
     // Start is called before the first frame update
     void Start()
@@ -53,8 +54,8 @@ public class player2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float x = Input.GetAxisRaw("Horizontal1") * Time.deltaTime * speed;
-        float z = Input.GetAxisRaw("Vertical1") * Time.deltaTime * speed;
+        float x = Input.GetAxisRaw("Horizontal2") * Time.deltaTime * speed;
+        float z = Input.GetAxisRaw("Vertical2") * Time.deltaTime * speed;
 
         //前移動のときだけ方向転換させる
         if (z > 0)
@@ -64,19 +65,20 @@ public class player2 : MonoBehaviour
 
         transform.position += transform.forward * z + transform.right * x;
 
-        if (Input.GetKeyDown(KeyCode.Joystick3Button1))
+        if (Input.GetKeyDown(KeyCode.Joystick1Button1)&&isJumping==false)
         {
-            this.rb.AddForce(transform.up * this.jumpForce);
+            this.rb.AddForce(transform.up * jumpForce);
             this.animator.SetTrigger("isJump");
-
             this.aud.PlayOneShot(this.jumpSE);
+
+            isJumping = true;
         }
 
         CheckGrab();
 
         if (canGrab)
         {
-            if (Input.GetKeyDown(KeyCode.Joystick3Button0))
+            if (Input.GetKeyDown(KeyCode.Joystick1Button0))
             {
                 PickUp();
                 this.aud.PlayOneShot(this.holdSE);
@@ -91,8 +93,14 @@ public class player2 : MonoBehaviour
                 GameObject director = GameObject.Find("GameDirector");
                 director.GetComponent<GameDirector>().YouWin2();
             }
+
+        if (other.gameObject.tag == "Stage")
+        {
+            isJumping = false;
+        }
         
     }
+
 
     private void CheckGrab()
     {
@@ -121,4 +129,6 @@ public class player2 : MonoBehaviour
         currentItem.transform.localEulerAngles = equipPosition.transform.localEulerAngles;
         currentItem.GetComponent<Rigidbody>().isKinematic = true;
     }
+
+
 }

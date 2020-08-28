@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     GameObject currentItem;
 
     bool canGrab;
+    bool isJumping = false;
 
     // Start is called before the first frame update
     void Start()
@@ -84,12 +85,13 @@ public class PlayerController : MonoBehaviour
 
 
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)&&isJumping==false)
         {
-            this.rb.AddForce(transform.up*this.jumpForce);
+            this.rb.AddForce(transform.up*jumpForce);
             this.animator.SetTrigger("isJump");
 
             this.aud.PlayOneShot(this.jumpSE);
+            isJumping = true;
         }
 
         //前移動のときだけ方向転換させる
@@ -119,6 +121,11 @@ public class PlayerController : MonoBehaviour
         {
             GameObject director = GameObject.Find("GameDirector");
             director.GetComponent<GameDirector>().YouWin();
+        }
+
+        if (other.gameObject.tag == "Stage")
+        {
+            isJumping = false;
         }
     }
 

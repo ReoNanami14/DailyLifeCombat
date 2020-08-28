@@ -159,12 +159,12 @@ InputManager:
     altPositiveButton: 
     gravity: 0
     dead: 0.19
-    sensitivity: 1
+    sensitivity: 0.3
     snap: 0
     invert: 1
     type: 2
     axis: 9
-    joyNum: 3
+    joyNum: 1
   - serializedVersion: 3
     m_Name: Horizontal2
     descriptiveName: 
@@ -175,7 +175,7 @@ InputManager:
     altPositiveButton: 
     gravity: 0
     dead: 0.19
-    sensitivity: 0.5
+    sensitivity: 1
     snap: 0
     invert: 0
     type: 2
@@ -191,12 +191,12 @@ InputManager:
     altPositiveButton: 
     gravity: 0
     dead: 0.19
-    sensitivity: 1
+    sensitivity: 0.3
     snap: 0
     invert: 0
     type: 2
     axis: 8
-    joyNum: 3
+    joyNum: 1
   - serializedVersion: 3
     m_Name: Vertical2
     descriptiveName: 
@@ -207,7 +207,7 @@ InputManager:
     altPositiveButton: 
     gravity: 0
     dead: 0.19
-    sensitivity: 0.5
+    sensitivity: 1
     snap: 0
     invert: 1
     type: 2

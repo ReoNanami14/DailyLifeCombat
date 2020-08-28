@@ -7,6 +7,7 @@ TagManager:
   - object
   - item
   - character
+  - Stage
   layers:
   - Default
   - TransparentFX
