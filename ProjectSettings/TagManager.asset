@@ -9,6 +9,7 @@ TagManager:
   - character
   - Stage
   - item2
+  - Item2
   layers:
   - Default
   - TransparentFX
