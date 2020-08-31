@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,7 +31,10 @@ public class PlayerController : MonoBehaviour
     GameObject currentItem;
 
     bool canGrab;
+    bool canGrab2;//追加
     bool isJumping = false;
+
+    int move = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -55,60 +57,83 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float x = Input.GetAxisRaw("Horizontal") * Time.deltaTime * speed;
-        float z = Input.GetAxisRaw("Vertical") * Time.deltaTime * speed;
+        //追加
+        if (move == 0)
+        {
 
-        if (Input.GetKey("w")||Input.GetKey("s"))
-        {
-            this.animator.SetBool(key_isRun, true);
-        }
-        if (Input.GetKeyUp("w") || Input.GetKeyUp("s"))
-        {
-            this.animator.SetBool(key_isRun, false);
-        }
-        if (Input.GetKey("d") )
-        {
-            this.animator.SetBool(key_isRunR, true);
-        }
-        if (Input.GetKeyUp("d") )
-        {
-            this.animator.SetBool(key_isRun, false);
-        }
-        if (Input.GetKey("a"))
-        {
-            this.animator.SetBool(key_isRunL, true);
-        }
-        if (Input.GetKeyUp("a"))
-        {
-            this.animator.SetBool(key_isRunL, false);
-        }
+            float x = Input.GetAxisRaw("Horizontal") * Time.deltaTime * speed;
+            float z = Input.GetAxisRaw("Vertical") * Time.deltaTime * speed;
+
+            if (Input.GetKey("w") || Input.GetKey("s"))
+            {
+                this.animator.SetBool(key_isRun, true);
+            }
+            if (Input.GetKeyUp("w") || Input.GetKeyUp("s"))
+            {
+                this.animator.SetBool(key_isRun, false);
+            }
+            if (Input.GetKey("d"))
+            {
+                this.animator.SetBool(key_isRunR, true);
+            }
+            if (Input.GetKeyUp("d"))
+            {
+                this.animator.SetBool(key_isRun, false);
+            }
+            if (Input.GetKey("a"))
+            {
+                this.animator.SetBool(key_isRunL, true);
+            }
+            if (Input.GetKeyUp("a"))
+            {
+                this.animator.SetBool(key_isRunL, false);
+            }
 
 
 
-        if (Input.GetKeyDown(KeyCode.Space)&&isJumping==false)
-        {
-            this.rb.AddForce(transform.up*jumpForce);
-            this.animator.SetTrigger("isJump");
+            if (Input.GetKeyDown(KeyCode.Space) && isJumping == false)
+            {
+                this.rb.AddForce(transform.up * jumpForce);
+                this.animator.SetTrigger("isJump");
 
-            this.aud.PlayOneShot(this.jumpSE);
-            isJumping = true;
+                this.aud.PlayOneShot(this.jumpSE);
+                isJumping = true;
+            }
+
+            //前移動のときだけ方向転換させる
+            if (z > 0)
+            {
+                transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, cam.eulerAngles.y, transform.rotation.z));
+            }
+
+            transform.position += transform.forward * z + transform.right * x;
+
+            CheckGrab();
+
         }
-
-        //前移動のときだけ方向転換させる
-        if (z> 0)
-        {
-            transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, cam.eulerAngles.y, transform.rotation.z));
-        }
-       
-        transform.position += transform.forward * z + transform.right * x;
-
-        CheckGrab();      
 
         if (canGrab)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
+                //PickUp();
+                //追加
+                move = 1;
+
+                Invoke("PickUp", 10f);
+                this.aud.PlayOneShot(this.holdSE);
+            }
+        }
+        //追加
+        if (canGrab2)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
                 PickUp();
+                //追加
+                //move = 1;
+
+                //Invoke("PickUp", 1.5f);
                 this.aud.PlayOneShot(this.holdSE);
             }
         }
@@ -142,10 +167,24 @@ public class PlayerController : MonoBehaviour
                 currentItem = hit.transform.gameObject;
                 canGrab = true;
             }
+
            
         }
         else
             canGrab = false;
+
+        //追加
+        if (Physics.Raycast(ray, out hit, distance))
+        {
+            if (hit.transform.tag == "item2")
+            {
+                currentItem = hit.transform.gameObject;
+                canGrab2 = true;
+            }
+        }
+        else
+           canGrab2 = false;
+
         //Raycastの可視化
         Debug.DrawRay(ray.origin, ray.direction * distance, Color.red);
     }
@@ -157,6 +196,9 @@ public class PlayerController : MonoBehaviour
         currentItem.transform.parent = equipPosition;
         currentItem.transform.localEulerAngles = equipPosition.transform.localEulerAngles;
         currentItem.GetComponent<Rigidbody>().isKinematic = true;
+
+        //追加
+        move = 0;
     }
 
 }
