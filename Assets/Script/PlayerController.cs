@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
 
         this.aud = GetComponent<AudioSource>();
 
+
     }
 
     // Update is called once per frame
@@ -108,7 +109,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                PickUp();
+                Invoke("PickUp", 3);
                 this.aud.PlayOneShot(this.holdSE);
             }
         }
