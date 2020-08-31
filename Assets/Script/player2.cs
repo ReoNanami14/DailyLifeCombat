@@ -65,7 +65,7 @@ public class player2 : MonoBehaviour
 
         transform.position += transform.forward * z + transform.right * x;
 
-        if (Input.GetKeyDown(KeyCode.Joystick1Button1)&&isJumping==false)
+        if (Input.GetKeyDown(KeyCode.Joystick2Button1)&&isJumping==false)
         {
             this.rb.AddForce(transform.up * jumpForce);
             this.animator.SetTrigger("isJump");
@@ -78,7 +78,7 @@ public class player2 : MonoBehaviour
 
         if (canGrab)
         {
-            if (Input.GetKeyDown(KeyCode.Joystick1Button0))
+            if (Input.GetKeyDown(KeyCode.Joystick2Button0))
             {
                 PickUp();
                 this.aud.PlayOneShot(this.holdSE);

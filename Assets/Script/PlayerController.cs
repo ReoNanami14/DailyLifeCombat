@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -109,7 +108,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Invoke("PickUp", 3);
+                Invoke("PickUp",3);
                 this.aud.PlayOneShot(this.holdSE);
             }
         }
