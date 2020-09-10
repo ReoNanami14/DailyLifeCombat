@@ -34,6 +34,8 @@ public class player2 : MonoBehaviour
     bool canGrab;
     bool isJumping = false;
 
+    public float holdTime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,16 +56,20 @@ public class player2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float x = Input.GetAxisRaw("Horizontal2") * Time.deltaTime * speed;
-        float z = Input.GetAxisRaw("Vertical2") * Time.deltaTime * speed;
+        
+            float x = Input.GetAxisRaw("Horizontal2") * Time.deltaTime * speed;
+            float z = Input.GetAxisRaw("Vertical2") * Time.deltaTime * speed;
 
-        //前移動のときだけ方向転換させる
-        if (z > 0)
-        {
-            transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, cam.eulerAngles.y, transform.rotation.z));
-        }
 
-        transform.position += transform.forward * z + transform.right * x;
+            //前移動のときだけ方向転換させる
+            if (z > 0)
+            {
+                transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, cam.eulerAngles.y, transform.rotation.z));
+            }
+
+        
+            transform.position += transform.forward * z + transform.right * x;
+       
 
         if (Input.GetKeyDown(KeyCode.Joystick2Button1)&&isJumping==false)
         {
@@ -80,10 +86,21 @@ public class player2 : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Joystick2Button0))
             {
-                PickUp();
+                Invoke("PickUp", holdTime);
+                IsInvoking("PickUp");
                 this.aud.PlayOneShot(this.holdSE);
             }
         }
+
+        if (IsInvoking("PickUp"))
+        {
+            if (Input.GetAxisRaw("Horizontal2")==-1||Input.GetAxisRaw("Horizontal2")==1|| Input.GetAxisRaw("Vertical2") == -1 || Input.GetAxisRaw("Vertical2") == 1)
+            {
+                CancelInvoke();
+            }
+
+        }
+
     }
 
     void OnCollisionEnter(Collision other)
@@ -112,6 +129,7 @@ public class player2 : MonoBehaviour
         {
             if (hit.transform.tag == "item")
             {
+                holdTime = hit.collider.gameObject.GetComponent<pickUp>().HTime;
                 currentItem = hit.transform.gameObject;
                 canGrab = true;
             }

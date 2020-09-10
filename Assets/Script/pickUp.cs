@@ -16,11 +16,13 @@ public class pickUp : MonoBehaviour
     //追加
     public AudioClip holdSE;
     public AudioClip throwSE;
-
     AudioSource aud;
 
     bool touch=false;
     bool touch2 = false;
+
+    public float HTime; //アイテムを持つまでの時間
+    public float CountTime;
 
     void Start()
     {
@@ -32,10 +34,14 @@ public class pickUp : MonoBehaviour
         //new
         this.aud = GetComponent<AudioSource>();
 
+        //PController = GameObject.Find("unitychan");
+        //playerController = PController.GetComponent<PlayerController>();
+
+        ////playerController.holdTime = HTime;
     }
     void Update()
     {
-      
+
         if (Input.GetKeyDown("r")||Input.GetKeyDown(KeyCode.Joystick2Button2))
         {
             this.rb.useGravity = true;
@@ -79,13 +85,13 @@ public class pickUp : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
 
+       
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (touch==true)
+        if (touch)
         {
             if (collision.gameObject.name == "enemy")
             {
@@ -95,7 +101,7 @@ public class pickUp : MonoBehaviour
             }
         }
 
-        if (touch2 == true)
+        if (touch2)
         {
             if (collision.gameObject.name == "unitychan")
             {

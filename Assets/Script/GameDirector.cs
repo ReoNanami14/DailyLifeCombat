@@ -8,7 +8,7 @@ public class GameDirector : MonoBehaviour
     GameObject win;
     GameObject hpGage;
     GameObject hpGage2;
-    //public float damage;
+
 
     // Start is called before the first frame update
     void Start()
@@ -40,4 +40,6 @@ public class GameDirector : MonoBehaviour
             this.win.GetComponent<Text>().text = "You Win!!";
         }
     }
+
+  
 }
