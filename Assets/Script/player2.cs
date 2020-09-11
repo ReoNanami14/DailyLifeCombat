@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Rigidbody))]
@@ -35,6 +36,9 @@ public class player2 : MonoBehaviour
     bool isJumping = false;
 
     public float holdTime;
+    public float count;
+    public Text countText;
+    bool isCountdownStart;
 
     // Start is called before the first frame update
     void Start()
@@ -71,7 +75,7 @@ public class player2 : MonoBehaviour
             transform.position += transform.forward * z + transform.right * x;
        
 
-        if (Input.GetKeyDown(KeyCode.Joystick2Button1)&&isJumping==false)
+        if (Input.GetKeyDown(KeyCode.Joystick1Button1)&&isJumping==false)
         {
             this.rb.AddForce(transform.up * jumpForce);
             this.animator.SetTrigger("isJump");
@@ -84,34 +88,49 @@ public class player2 : MonoBehaviour
 
         if (canGrab)
         {
-            if (Input.GetKeyDown(KeyCode.Joystick2Button0))
+            if (Input.GetKeyDown(KeyCode.Joystick1Button0))
             {
                 Invoke("PickUp", holdTime);
-                IsInvoking("PickUp");
+                isCountdownStart = true;
+                countText.gameObject.SetActive(true);
                 this.aud.PlayOneShot(this.holdSE);
             }
         }
 
         if (IsInvoking("PickUp"))
         {
-            if (Input.GetAxisRaw("Horizontal2")==-1||Input.GetAxisRaw("Horizontal2")==1|| Input.GetAxisRaw("Vertical2") == -1 || Input.GetAxisRaw("Vertical2") == 1)
+            if (Input.GetAxisRaw("Horizontal2")==-1||Input.GetAxisRaw("Horizontal2")==1|| Input.GetAxisRaw("Vertical2") == -1 || Input.GetAxisRaw("Vertical2") == 1|| Input.GetKeyDown(KeyCode.Joystick1Button1))
             {
                 CancelInvoke();
+                countText.gameObject.SetActive(false);
+                count = Time.deltaTime;
             }
 
+        }
+
+        if (isCountdownStart)
+        {
+            count -= Time.deltaTime;
+            countText.text = count.ToString("f2");
+        }
+
+        if (count < 0)
+        {
+            countText.gameObject.SetActive(false);
+            isCountdownStart = false;
         }
 
     }
 
     void OnCollisionEnter(Collision other)
     {
-            if (other.gameObject.tag == "item" )
+            if (other.gameObject.CompareTag("item"))
             {
                 GameObject director = GameObject.Find("GameDirector");
                 director.GetComponent<GameDirector>().YouWin2();
             }
 
-        if (other.gameObject.tag == "Stage")
+        if (other.gameObject.CompareTag("Stage"))
         {
             isJumping = false;
         }
@@ -127,11 +146,16 @@ public class player2 : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, distance))
         {
-            if (hit.transform.tag == "item")
+            if (hit.transform.CompareTag("item"))
             {
-                holdTime = hit.collider.gameObject.GetComponent<pickUp>().HTime;
                 currentItem = hit.transform.gameObject;
                 canGrab = true;
+                holdTime = hit.collider.gameObject.GetComponent<pickUp>().HTime;
+
+                if (!isCountdownStart)
+                {
+                    count = hit.collider.gameObject.GetComponent<pickUp>().CountTime;
+                }
             }
 
         }

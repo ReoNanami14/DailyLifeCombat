@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour
             {
                 CancelInvoke();
                 countText.gameObject.SetActive(false);
-                count = 3;
+                count = Time.deltaTime;
             }
 
         }
@@ -141,22 +141,22 @@ public class PlayerController : MonoBehaviour
 
         if (count < 0)
         {
-            count = 3;
             countText.gameObject.SetActive(false);
             isCountdownStart = false;
         }
 
     }
+
     void OnCollisionEnter(Collision other)
     {
        
-        if (other.gameObject.tag == "item")
+        if (other.gameObject.CompareTag("item"))
         {
             GameObject director = GameObject.Find("GameDirector");
             director.GetComponent<GameDirector>().YouWin();
         }
 
-        if (other.gameObject.tag == "Stage")
+        if (other.gameObject.CompareTag("Stage"))
         {
             isJumping = false;
         }
@@ -170,13 +170,17 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, distance))
         {
-            if (hit.transform.tag == "item")
+            if (hit.transform.CompareTag("item"))
             {
-                currentItem = hit.transform.gameObject;
-                canGrab = true;
-                holdTime = hit.collider.gameObject.GetComponent<pickUp>().HTime;
-                //count = hit.collider.gameObject.GetComponent<pickUp>().CountTime;
-                
+               
+                    currentItem = hit.transform.gameObject;
+                    canGrab = true;
+                    holdTime = hit.collider.gameObject.GetComponent<pickUp>().HTime;
+
+                if (!isCountdownStart)
+                {
+                    count = hit.collider.gameObject.GetComponent<pickUp>().CountTime;
+                }
             }
 
         }

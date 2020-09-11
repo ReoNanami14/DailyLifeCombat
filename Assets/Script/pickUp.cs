@@ -34,15 +34,11 @@ public class pickUp : MonoBehaviour
         //new
         this.aud = GetComponent<AudioSource>();
 
-        //PController = GameObject.Find("unitychan");
-        //playerController = PController.GetComponent<PlayerController>();
-
-        ////playerController.holdTime = HTime;
     }
     void Update()
     {
 
-        if (Input.GetKeyDown("r")||Input.GetKeyDown(KeyCode.Joystick2Button2))
+        if (Input.GetKeyDown("r")||Input.GetKeyDown(KeyCode.Joystick1Button2))
         {
             this.rb.useGravity = true;
             this.rb.isKinematic=false;
@@ -68,7 +64,7 @@ public class pickUp : MonoBehaviour
         if (this.transform.position == theDest2.position)
         {
             touch2 = true;
-            if (Input.GetKeyDown(KeyCode.Joystick2Button15))
+            if (Input.GetKeyDown(KeyCode.Joystick1Button15))
             {
                 this.transform.parent = null;
                 this.rb.useGravity = true;
@@ -95,9 +91,8 @@ public class pickUp : MonoBehaviour
         {
             if (collision.gameObject.name == "enemy")
             {
-                //GameObject director = GameObject.Find("GameDirector");
-                //director.GetComponent<GameDirector>().DecreaseHp2();
                 this.hpGage2.GetComponent<Image>().fillAmount -= damage;
+                touch = false;
             }
         }
 
@@ -105,9 +100,8 @@ public class pickUp : MonoBehaviour
         {
             if (collision.gameObject.name == "unitychan")
             {
-                //GameObject director = GameObject.Find("GameDirector");
-                //director.GetComponent<GameDirector>().DecreaseHp();
                 this.hpGage.GetComponent<Image>().fillAmount -= damage;
+                touch2 = false;
             }
         }
     }
