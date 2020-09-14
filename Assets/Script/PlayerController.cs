@@ -61,8 +61,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-            float x = Input.GetAxisRaw("Horizontal") * Time.deltaTime * speed;
-            float z = Input.GetAxisRaw("Vertical") * Time.deltaTime * speed;
+      float x = Input.GetAxisRaw("Horizontal") * Time.deltaTime * speed;
+      float z = Input.GetAxisRaw("Vertical") * Time.deltaTime * speed;
 
             if (Input.GetKey("w") || Input.GetKey("s"))
             {
@@ -106,9 +106,12 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, cam.eulerAngles.y, transform.rotation.z));
             }
 
-            transform.position += transform.forward * z + transform.right * x;
+        transform.position += transform.forward * z + transform.right * x;
 
-            CheckGrab();
+        GameObject director = GameObject.Find("GameDirector");
+        director.GetComponent<GameDirector>().WinLose();
+
+        CheckGrab();
 
         if (canGrab)
         {
@@ -153,7 +156,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("item"))
         {
             GameObject director = GameObject.Find("GameDirector");
-            director.GetComponent<GameDirector>().YouWin();
+            director.GetComponent<GameDirector>().WinLose();
         }
 
         if (other.gameObject.CompareTag("Stage"))
@@ -202,17 +205,6 @@ public class PlayerController : MonoBehaviour
         currentItem.transform.localEulerAngles = equipPosition.transform.localEulerAngles;
         currentItem.GetComponent<Rigidbody>().isKinematic = true;
 
-    }
-
-    private void Countdown()
-    {
-        holdTime -= Time.deltaTime;
-        countText.text =holdTime.ToString("f2");
-        if (holdTime <= 0)
-        {
-            countText.gameObject.SetActive(false);
-            isCountdownStart = false;
-        }
     }
  
 }

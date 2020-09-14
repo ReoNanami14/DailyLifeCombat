@@ -64,7 +64,7 @@ public class pickUp : MonoBehaviour
         if (this.transform.position == theDest2.position)
         {
             touch2 = true;
-            if (Input.GetKeyDown(KeyCode.Joystick1Button15))
+            if (Input.GetKeyDown(KeyCode.Joystick2Button15))
             {
                 this.transform.parent = null;
                 this.rb.useGravity = true;

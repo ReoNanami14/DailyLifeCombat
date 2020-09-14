@@ -55,6 +55,7 @@ public class player2 : MonoBehaviour
         caps.height = 1.5f;
 
         this.aud = GetComponent<AudioSource>();
+
     }
 
     // Update is called once per frame
@@ -83,6 +84,9 @@ public class player2 : MonoBehaviour
 
             isJumping = true;
         }
+
+        GameObject director = GameObject.Find("GameDirector");
+        director.GetComponent<GameDirector>().TimeOver();
 
         CheckGrab();
 
@@ -122,21 +126,22 @@ public class player2 : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision other)
+    private void OnCollisionExit(Collision other)
     {
-            if (other.gameObject.CompareTag("item"))
-            {
-                GameObject director = GameObject.Find("GameDirector");
-                director.GetComponent<GameDirector>().YouWin2();
-            }
+        if (other.gameObject.CompareTag("item"))
+        {
+            GameObject director = GameObject.Find("GameDirector");
+            director.GetComponent<GameDirector>().WinLose2();
+        }     
+    }
 
+    private void OnCollisionEnter(Collision other)
+    {
         if (other.gameObject.CompareTag("Stage"))
         {
             isJumping = false;
         }
-        
     }
-
 
     private void CheckGrab()
     {
