@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Rigidbody))]
@@ -26,15 +27,18 @@ public class PlayerController : MonoBehaviour
     public AudioClip jumpSE;
     public AudioClip holdSE;
 
-    public float distance = 10f;
+    public float distance; //Rayの距離
     public Transform equipPosition;
     GameObject currentItem;
 
     bool canGrab;
-    bool canGrab2;//追加
     bool isJumping = false;
 
-    int move = 0;//追加
+    public float holdTime; //アイテムを持つまでの時間
+    public float count;
+    public Text countText;
+    bool isCountdownStart;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,17 +55,14 @@ public class PlayerController : MonoBehaviour
 
         this.aud = GetComponent<AudioSource>();
 
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        //追加
-        if (move == 0)
-        {
-            float x = Input.GetAxisRaw("Horizontal") * Time.deltaTime * speed;
-            float z = Input.GetAxisRaw("Vertical") * Time.deltaTime * speed;
+
+      float x = Input.GetAxisRaw("Horizontal") * Time.deltaTime * speed;
+      float z = Input.GetAxisRaw("Vertical") * Time.deltaTime * speed;
 
             if (Input.GetKey("w") || Input.GetKey("s"))
             {
@@ -105,46 +106,60 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, cam.eulerAngles.y, transform.rotation.z));
             }
 
-            transform.position += transform.forward * z + transform.right * x;
+        transform.position += transform.forward * z + transform.right * x;
 
-            CheckGrab();
-        }
+        GameObject director = GameObject.Find("GameDirector");
+        director.GetComponent<GameDirector>().WinLose();
+
+        CheckGrab();
+
         if (canGrab)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                //PickUp();
-                //追加
-                move = 1;
-
-                Invoke("PickUp", 3f);
+                Invoke("PickUp", holdTime);
                 this.aud.PlayOneShot(this.holdSE);
+                isCountdownStart = true;
+                countText.gameObject.SetActive(true);
             }
+
         }
-        //追加
-        if (canGrab2)
+
+        if (IsInvoking("PickUp"))
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D)||Input.GetKeyDown(KeyCode.Space))
             {
-                PickUp();
-                //追加
-                //move = 1;
-
-                //Invoke("PickUp", 1.5f);
-                this.aud.PlayOneShot(this.holdSE);
+                CancelInvoke();
+                countText.gameObject.SetActive(false);
+                count = Time.deltaTime;
             }
+
         }
+
+        if (isCountdownStart)
+        {
+            count-= Time.deltaTime;
+            countText.text = count.ToString("f2");
+        }
+
+        if (count < 0)
+        {
+            countText.gameObject.SetActive(false);
+            isCountdownStart = false;
+        }
+
     }
+
     void OnCollisionEnter(Collision other)
     {
        
-        if (other.gameObject.tag == "item")
+        if (other.gameObject.CompareTag("item"))
         {
             GameObject director = GameObject.Find("GameDirector");
-            director.GetComponent<GameDirector>().YouWin();
+            director.GetComponent<GameDirector>().WinLose();
         }
 
-        if (other.gameObject.tag == "Stage")
+        if (other.gameObject.CompareTag("Stage"))
         {
             isJumping = false;
         }
@@ -158,28 +173,25 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, distance))
         {
-            if (hit.transform.tag == "item")
+            if (hit.transform.CompareTag("item"))
             {
-                currentItem = hit.transform.gameObject;
-                canGrab = true;
-            }
+               
+                    currentItem = hit.transform.gameObject;
+                    canGrab = true;
+                    holdTime = hit.collider.gameObject.GetComponent<pickUp>().HTime;
 
+                if (!isCountdownStart)
+                {
+                    count = hit.collider.gameObject.GetComponent<pickUp>().CountTime;
+                }
+            }
 
         }
         else
-            canGrab = false;
-
-        //追加
-        if (Physics.Raycast(ray, out hit, distance))
         {
-            if (hit.transform.tag == "item2")
-            {
-                currentItem = hit.transform.gameObject;
-                canGrab2 = true;
-            }
-        }
-        else
-            canGrab2 = false;
+            canGrab = false;
+ 
+        }           
 
         //Raycastの可視化
         Debug.DrawRay(ray.origin, ray.direction * distance, Color.red);
@@ -193,8 +205,6 @@ public class PlayerController : MonoBehaviour
         currentItem.transform.localEulerAngles = equipPosition.transform.localEulerAngles;
         currentItem.GetComponent<Rigidbody>().isKinematic = true;
 
-        //追加
-        move = 0;
     }
-
+ 
 }
