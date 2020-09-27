@@ -1,0 +1,10 @@
+diff a/Assets/BGM.meta b/Assets/BGM.meta	(rejected hunks)
+@@ -0,0 +1,8 @@
++fileFormatVersion: 2
++guid: f3674596428ba754db2aca627dfdb71c
++folderAsset: yes
++DefaultImporter:
++  externalObjects: {}
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
