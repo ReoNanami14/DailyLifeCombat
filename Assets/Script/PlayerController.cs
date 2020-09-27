@@ -41,6 +41,9 @@ public class PlayerController : MonoBehaviour
     public Text countText;
     bool isCountdownStart;
 
+    //キャラクター状態
+    bool isBrother = false;
+    bool isSister = false;
 
     // Start is called before the first frame update
     void Start()
@@ -189,6 +192,11 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
         }
 
+        if (other.gameObject.CompareTag("otouto"))
+        {
+            isBrother = true;
+        }
+
     }
 
     private void CheckGrab()
@@ -211,7 +219,18 @@ public class PlayerController : MonoBehaviour
                     count = hit.collider.gameObject.GetComponent<pickUp>().CountTime;
                 }
             }
+            if (hit.transform.CompareTag("spItem")&&isBrother)
+            {
 
+                currentItem = hit.transform.gameObject;
+                canGrab = true;
+                holdTime = hit.collider.gameObject.GetComponent<pickUp>().HTime;
+
+                if (!isCountdownStart)
+                {
+                    count = hit.collider.gameObject.GetComponent<pickUp>().CountTime;
+                }
+            }
         }
         else
         {
