@@ -1,18 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-
-public class start : MonoBehaviour
+public class bgm : MonoBehaviour
 {
-    public AudioClip startSE;
+    //public AudioClip BGM;
     AudioSource aud;
 
     // Start is called before the first frame update
     void Start()
     {
         this.aud = GetComponent<AudioSource>();
+        Invoke("BGMstart", 5.0f);
     }
 
     // Update is called once per frame
@@ -21,9 +20,8 @@ public class start : MonoBehaviour
 
     }
 
-    public void gameStart()
+    void BGMstart()
     {
-        this.aud.PlayOneShot(this.startSE);
-        SceneManager.LoadScene("GameScene");
+        aud.Play();
     }
 }
