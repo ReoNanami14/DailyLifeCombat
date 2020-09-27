@@ -21,9 +21,14 @@ public class pickUp : MonoBehaviour
     GameObject hpGage2;
     public float damage;
 
-    //追加
-    public AudioClip holdSE;
+    //SE
+   // public AudioClip holdSE;
     public AudioClip throwSE;
+    public AudioClip damageSE;
+    public AudioClip damagevoice;
+    public AudioClip throwSE2;
+    public AudioClip damageSE2;
+    public AudioClip damagevoice2;
     AudioSource aud;
 
     bool touch=false;
@@ -64,7 +69,7 @@ public class pickUp : MonoBehaviour
                 this.rb.isKinematic = false;
                 this.rb.AddForce(transform.forward * speed);
 
-                //new
+                //投げるSE
                 this.aud.PlayOneShot(this.throwSE);
             }
         }
@@ -79,8 +84,8 @@ public class pickUp : MonoBehaviour
                 this.rb.isKinematic = false;
                 this.rb.AddForce(transform.forward * speed);
 
-                //new
-                this.aud.PlayOneShot(this.throwSE);
+                //投げるSE
+                this.aud.PlayOneShot(this.throwSE2);
             }
         }
 
@@ -101,6 +106,9 @@ public class pickUp : MonoBehaviour
             {
                 this.hpGage2.GetComponent<Image>().fillAmount -= damage;
                 touch = false;
+
+                this.aud.PlayOneShot(this.damageSE2);//ぶつかり音
+                this.aud.PlayOneShot(this.damagevoice2);
             }
         }
 
@@ -110,6 +118,9 @@ public class pickUp : MonoBehaviour
             {
                 this.hpGage.GetComponent<Image>().fillAmount -= damage;
                 touch2 = false;
+
+                this.aud.PlayOneShot(this.damageSE);//ぶつかり音
+                this.aud.PlayOneShot(this.damagevoice);
             }
         }
     }
