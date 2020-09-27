@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -267,8 +267,12 @@ MonoBehaviour:
   theDest2_sister: {fileID: 806731927}
   speed: 1500
   damage: 0.2
-  holdSE: {fileID: 8300000, guid: eed2451bbd4264da8b6c27c92df62faf, type: 3}
   throwSE: {fileID: 8300000, guid: 687990b2a12cc4b6db34fdeceb9b8636, type: 3}
+  damageSE: {fileID: 0}
+  damagevoice: {fileID: 0}
+  throwSE2: {fileID: 0}
+  damageSE2: {fileID: 0}
+  damagevoice2: {fileID: 0}
   HTime: 2
   CountTime: 2
 --- !u!1 &29249671
@@ -295,7 +299,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 29249671}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.010000005, y: 1.2880001, z: 0.78999996}
+  m_LocalPosition: {x: 0.010000005, y: 1.2880001, z: 1.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1122346616}
@@ -997,7 +1001,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 323398909}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.01000001, y: 1.288, z: 0.79}
+  m_LocalPosition: {x: 0.01000001, y: 1.288, z: 1.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1031952959}
@@ -2287,7 +2291,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &888382757
 GameObject:
@@ -2978,7 +2982,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1031952957}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1fa2b637980b87e4090164a21f9dc370, type: 3}
   m_Name: 
@@ -3088,33 +3092,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1031952965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1031952957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 250e883c455d9164e84830bde4a40667, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 1768922438}
+  speed: 4
+  jumpForce: 4000
+  Dest: {fileID: 323398910}
+  jumpSE: {fileID: 8300000, guid: 6ccbc3d284bd849d49fb1f8f94ab2888, type: 3}
+  holdSE: {fileID: 8300000, guid: eed2451bbd4264da8b6c27c92df62faf, type: 3}
+  distance: 1.5
+  equipPosition: {fileID: 323398910}
+  countText: {fileID: 353844463}
 --- !u!1 &1122346609 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100326, guid: 8f0565f23a2b58541a475bd3c1393052,
     type: 3}
   m_PrefabInstance: {fileID: 1136406648}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1122346610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1122346609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fa2b637980b87e4090164a21f9dc370, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 888382761}
-  speed: 4
-  jumpForce: 4000
-  Dest: {fileID: 29249672}
-  jumpSE: {fileID: 8300000, guid: 6ccbc3d284bd849d49fb1f8f94ab2888, type: 3}
-  holdSE: {fileID: 8300000, guid: eed2451bbd4264da8b6c27c92df62faf, type: 3}
-  distance: 1.5
-  equipPosition: {fileID: 29249672}
-  countText: {fileID: 353844463}
 --- !u!82 &1122346612
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3241,6 +3245,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1122346615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122346609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0c74aab9f022f6479993896e174a3bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 888382761}
+  speed: 4
+  jumpForce: 4000
+  Dest: {fileID: 29249672}
+  jumpSE: {fileID: 8300000, guid: 6ccbc3d284bd849d49fb1f8f94ab2888, type: 3}
+  holdSE: {fileID: 8300000, guid: eed2451bbd4264da8b6c27c92df62faf, type: 3}
+  distance: 1.5
+  equipPosition: {fileID: 29249672}
+  countText: {fileID: 353844463}
 --- !u!4 &1122346616 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400326, guid: 8f0565f23a2b58541a475bd3c1393052,
@@ -4926,7 +4951,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1644028668 stripped
 GameObject:
@@ -6112,7 +6137,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 76713103928495660}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.010000005, y: 1.2880001, z: 0.78999996}
+  m_LocalPosition: {x: 0.010000005, y: 1.2880001, z: 1.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1362650083}

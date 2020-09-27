@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
 
-public class PlayerController : MonoBehaviour
+public class OnlyBrother : MonoBehaviour
 {
     [SerializeField] Transform cam;
-   public float speed;
+    public float speed;
     [SerializeField] float jumpForce = 300;
 
     private Animator animator;
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     bool isJumping = false;
 
     //アイテムを持つまでの時間
-    private float holdTime; 
+    private float holdTime;
     private float count;
     public Text countText;
     bool isCountdownStart;
@@ -54,15 +54,15 @@ public class PlayerController : MonoBehaviour
         this.aud = GetComponent<AudioSource>();
 
     }
-    
+
     // Update is called once per frame
     void Update()
     {
 
-        float x = Input.GetAxisRaw("Horizontal")* Time.deltaTime * speed;
-        float z = Input.GetAxisRaw("Vertical")* Time.deltaTime * speed;
+        float x = Input.GetAxisRaw("Horizontal") * Time.deltaTime * speed;
+        float z = Input.GetAxisRaw("Vertical") * Time.deltaTime * speed;
 
-        if (Input.GetKey(KeyCode.W)||Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
         {
             //waitからrunに遷移する
             this.animator.SetBool(key_isRun, true);
@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
         {
             this.animator.SetBool(key_isWait, true);
         }
-        if(Input.GetKeyUp(KeyCode.W)||(Input.GetKeyUp(KeyCode.S)))
+        if (Input.GetKeyUp(KeyCode.W) || (Input.GetKeyUp(KeyCode.S)))
         {
             //runからwaitに遷移する
             this.animator.SetBool(key_isRun, false);
@@ -93,14 +93,14 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
         {
-           // this.animator.SetBool(key_isRunL, true);
+            // this.animator.SetBool(key_isRunL, true);
             Quaternion rot = Quaternion.AngleAxis(-2, Vector3.up);
             Quaternion Q = this.transform.rotation;
             this.transform.rotation = Q * rot;
         }
         else
         {
-          //  this.animator.SetBool(key_isRunL, false);
+            //  this.animator.SetBool(key_isRunL, false);
         }
 
         //ジャンプ処理
@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
             this.aud.PlayOneShot(this.jumpSE);
             isJumping = true;
-        }   
+        }
         else
         {
             this.animator.SetBool(key_isJump, false);
@@ -144,7 +144,7 @@ public class PlayerController : MonoBehaviour
 
         if (IsInvoking("PickUp"))
         {
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D)||Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.Space))
             {
                 CancelInvoke();
                 countText.gameObject.SetActive(false);
@@ -155,7 +155,7 @@ public class PlayerController : MonoBehaviour
 
         if (isCountdownStart)
         {
-            count-= Time.deltaTime;
+            count -= Time.deltaTime;
             countText.text = count.ToString("f2");
         }
 
@@ -192,18 +192,18 @@ public class PlayerController : MonoBehaviour
 
     private void CheckGrab()
     {
-        Ray ray = new Ray(transform.position+new Vector3(0,0.15f,0) , transform.forward);
+        Ray ray = new Ray(transform.position + new Vector3(0, 0.15f, 0), transform.forward);
 
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, distance))
         {
-            if (hit.transform.CompareTag("item"))
+            if (hit.transform.CompareTag("item")||hit.transform.CompareTag("spItem"))
             {
-               
-                    currentItem = hit.transform.gameObject;
-                    canGrab = true;
-                    holdTime = hit.collider.gameObject.GetComponent<pickUp>().HTime;
+
+                currentItem = hit.transform.gameObject;
+                canGrab = true;
+                holdTime = hit.collider.gameObject.GetComponent<pickUp>().HTime;
 
                 if (!isCountdownStart)
                 {
@@ -216,8 +216,8 @@ public class PlayerController : MonoBehaviour
         else
         {
             canGrab = false;
- 
-        }           
+
+        }
 
         //Raycastの可視化
         Debug.DrawRay(ray.origin, ray.direction * distance, Color.red);
@@ -232,6 +232,4 @@ public class PlayerController : MonoBehaviour
         currentItem.GetComponent<Rigidbody>().isKinematic = true;
 
     }
-
-
 }

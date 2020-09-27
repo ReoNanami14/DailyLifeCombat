@@ -114,6 +114,11 @@ public class GameDirector : MonoBehaviour
         }
     }
 
+    public void SisterSkill()
+    {
+
+    }
+
     IEnumerator CountdownCoroutine()
     {
         startCount.gameObject.SetActive(true);
