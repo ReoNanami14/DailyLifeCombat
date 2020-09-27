@@ -70,7 +70,7 @@ public class pickUp : MonoBehaviour
                 this.rb.AddForce(transform.forward * speed);
 
                 //投げるSE
-                this.aud.PlayOneShot(this.throwSE);
+                //this.aud.PlayOneShot(this.throwSE);
             }
         }
 
@@ -85,7 +85,7 @@ public class pickUp : MonoBehaviour
                 this.rb.AddForce(transform.forward * speed);
 
                 //投げるSE
-                this.aud.PlayOneShot(this.throwSE2);
+               // this.aud.PlayOneShot(this.throwSE2);
             }
         }
 
@@ -107,8 +107,8 @@ public class pickUp : MonoBehaviour
                 this.hpGage2.GetComponent<Image>().fillAmount -= damage;
                 touch = false;
 
-                this.aud.PlayOneShot(this.damageSE2);//ぶつかり音
-                this.aud.PlayOneShot(this.damagevoice2);
+                //this.aud.PlayOneShot(this.damageSE2);//ぶつかり音
+               // this.aud.PlayOneShot(this.damagevoice2);
             }
         }
 
@@ -119,8 +119,8 @@ public class pickUp : MonoBehaviour
                 this.hpGage.GetComponent<Image>().fillAmount -= damage;
                 touch2 = false;
 
-                this.aud.PlayOneShot(this.damageSE);//ぶつかり音
-                this.aud.PlayOneShot(this.damagevoice);
+                //this.aud.PlayOneShot(this.damageSE);//ぶつかり音
+                //this.aud.PlayOneShot(this.damagevoice);
             }
         }
     }

@@ -60,6 +60,6 @@ public class Axis2 : MonoBehaviour
 
         //Math.Clamp(値,最小値,最大値)でX軸の値を制限する
         transform.eulerAngles = new Vector3(Mathf.Clamp(angleX, angleDown, angleUp), transform.eulerAngles.y, transform.eulerAngles.z);
-        ;
+        
     }
 }
