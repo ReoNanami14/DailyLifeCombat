@@ -9,7 +9,6 @@ public class GameDirector : MonoBehaviour
     [SerializeField] float gameTime = 20.0f;
     public Text uiText;
     public Text startCount;
-    public Text start;
     public GameObject pauseUI;
     public PlayerController PC;
     public player2 P2;
@@ -83,6 +82,11 @@ public class GameDirector : MonoBehaviour
                 this.win2.GetComponent<Text>().text = "You Win!!";
                 this.lose2.GetComponent<Text>().text = "You Lose!!";
             }
+            if(hpGage.GetComponent<Image>().fillAmount == hpGage2.GetComponent<Image>().fillAmount)
+            {
+                this.finish.GetComponent<Text>().text = "DRAW!!";
+                uiText.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -131,11 +135,10 @@ public class GameDirector : MonoBehaviour
         startCount.text = "1";
         yield return new WaitForSeconds(1.0f);
 
-        startCount.gameObject.SetActive(false);
-        start.text = "Start!";
+        startCount.text = "START!!";
         yield return new WaitForSeconds(1.0f);
 
-        start.gameObject.SetActive(false);
+        startCount.gameObject.SetActive(false);
         PC.enabled = true;
         P2.enabled = true;
     }

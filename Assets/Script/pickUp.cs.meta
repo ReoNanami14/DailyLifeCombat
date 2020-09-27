@@ -3,7 +3,19 @@ guid: e9ceb102fde685c4694c64c947fb180c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - theDest: {instanceID: 0}
+  - theDest_brother: {instanceID: 0}
+  - theDest_sister: {instanceID: 0}
+  - theDest2: {instanceID: 0}
+  - theDest2_brother: {instanceID: 0}
+  - theDest2_sister: {instanceID: 0}
+  - throwSE: {fileID: 8300000, guid: 687990b2a12cc4b6db34fdeceb9b8636, type: 3}
+  - damageSE: {fileID: 8300000, guid: 74cdb21875d68fb449ee1d0582069774, type: 3}
+  - damagevoice: {fileID: 8300000, guid: 23e7ee0c4720c4bd48c405abb4ffa7f2, type: 3}
+  - throwSE2: {fileID: 8300000, guid: 7949c6e43f6c7b34fb2cbf00764847f4, type: 3}
+  - damageSE2: {fileID: 8300000, guid: 74cdb21875d68fb449ee1d0582069774, type: 3}
+  - damagevoice2: {fileID: 8300000, guid: fb9e2837ca62dd64b9f421f03d19d2ba, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

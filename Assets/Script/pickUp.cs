@@ -5,17 +5,30 @@ using UnityEngine.UI;
 
 public class pickUp : MonoBehaviour
 {
+    //プレイヤー１に付くDestination
     public Transform theDest;
+    public Transform theDest_brother;
+    public Transform theDest_sister;
+
+    //プレイヤー２に付くDestination
     public Transform theDest2;
+    public Transform theDest2_brother;
+    public Transform theDest2_sister;
+
     Rigidbody rb;
     public float speed;
     GameObject hpGage;
     GameObject hpGage2;
     public float damage;
 
-    //追加
-    public AudioClip holdSE;
+    //SE
+   // public AudioClip holdSE;
     public AudioClip throwSE;
+    public AudioClip damageSE;
+    public AudioClip damagevoice;
+    public AudioClip throwSE2;
+    public AudioClip damageSE2;
+    public AudioClip damagevoice2;
     AudioSource aud;
 
     bool touch=false;
@@ -46,7 +59,7 @@ public class pickUp : MonoBehaviour
         }
 
 
-        if (this.transform.position == theDest.position)
+        if (this.transform.position == theDest.position|| this.transform.position == theDest_brother.position|| this.transform.position == theDest_sister.position)
         {
             touch = true;
             if (Input.GetMouseButtonDown(0))
@@ -56,12 +69,12 @@ public class pickUp : MonoBehaviour
                 this.rb.isKinematic = false;
                 this.rb.AddForce(transform.forward * speed);
 
-                //new
+                //投げるSE
                 this.aud.PlayOneShot(this.throwSE);
             }
         }
 
-        if (this.transform.position == theDest2.position)
+        if (this.transform.position == theDest2.position || this.transform.position == theDest2_brother.position || this.transform.position == theDest2_sister.position)
         {
             touch2 = true;
             if (Input.GetKeyDown(KeyCode.Joystick2Button15))
@@ -71,8 +84,8 @@ public class pickUp : MonoBehaviour
                 this.rb.isKinematic = false;
                 this.rb.AddForce(transform.forward * speed);
 
-                //new
-                this.aud.PlayOneShot(this.throwSE);
+                //投げるSE
+                this.aud.PlayOneShot(this.throwSE2);
             }
         }
 
@@ -89,19 +102,25 @@ public class pickUp : MonoBehaviour
     {
         if (touch)
         {
-            if (collision.gameObject.name == "enemy")
+            if (collision.gameObject.CompareTag("player2"))
             {
                 this.hpGage2.GetComponent<Image>().fillAmount -= damage;
                 touch = false;
+
+                this.aud.PlayOneShot(this.damageSE2);//ぶつかり音
+                this.aud.PlayOneShot(this.damagevoice2);
             }
         }
 
         if (touch2)
         {
-            if (collision.gameObject.name == "unitychan")
+            if (collision.gameObject.CompareTag("player1"))
             {
                 this.hpGage.GetComponent<Image>().fillAmount -= damage;
                 touch2 = false;
+
+                this.aud.PlayOneShot(this.damageSE);//ぶつかり音
+                this.aud.PlayOneShot(this.damagevoice);
             }
         }
     }
