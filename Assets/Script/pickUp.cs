@@ -5,8 +5,16 @@ using UnityEngine.UI;
 
 public class pickUp : MonoBehaviour
 {
+    //プレイヤー１に付くDestination
     public Transform theDest;
+    public Transform theDest_brother;
+    public Transform theDest_sister;
+
+    //プレイヤー２に付くDestination
     public Transform theDest2;
+    public Transform theDest2_brother;
+    public Transform theDest2_sister;
+
     Rigidbody rb;
     public float speed;
     GameObject hpGage;
@@ -46,7 +54,7 @@ public class pickUp : MonoBehaviour
         }
 
 
-        if (this.transform.position == theDest.position)
+        if (this.transform.position == theDest.position|| this.transform.position == theDest_brother.position|| this.transform.position == theDest_sister.position)
         {
             touch = true;
             if (Input.GetMouseButtonDown(0))
@@ -61,7 +69,7 @@ public class pickUp : MonoBehaviour
             }
         }
 
-        if (this.transform.position == theDest2.position)
+        if (this.transform.position == theDest2.position || this.transform.position == theDest2_brother.position || this.transform.position == theDest2_sister.position)
         {
             touch2 = true;
             if (Input.GetKeyDown(KeyCode.Joystick2Button15))
@@ -89,7 +97,7 @@ public class pickUp : MonoBehaviour
     {
         if (touch)
         {
-            if (collision.gameObject.name == "enemy")
+            if (collision.gameObject.CompareTag("player2"))
             {
                 this.hpGage2.GetComponent<Image>().fillAmount -= damage;
                 touch = false;
@@ -98,7 +106,7 @@ public class pickUp : MonoBehaviour
 
         if (touch2)
         {
-            if (collision.gameObject.name == "unitychan")
+            if (collision.gameObject.CompareTag("player1"))
             {
                 this.hpGage.GetComponent<Image>().fillAmount -= damage;
                 touch2 = false;

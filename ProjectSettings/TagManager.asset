@@ -4,12 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - object
   - item
   - character
   - Stage
-  - item2
-  - Item2
+  - otouto
+  - onechan
+  - player1
+  - player2
   layers:
   - Default
   - TransparentFX

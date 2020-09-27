@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Rigidbody))]
 public class player2 : MonoBehaviour
 {
@@ -14,14 +13,14 @@ public class player2 : MonoBehaviour
 
     private const string key_isRun = "isRun";
     private const string key_isJump = "isJump";
-    private const string key_isRunR = "isRunR";
-    private const string key_isRunL = "isRunL";
+    //private const string key_isRunR = "isRunR";
+    //private const string key_isRunL = "isRunL";
+    private const string key_isWait = "isWait";
+    private const string key_isDamaged = "isDamaged";
 
     [SerializeField] Transform cam;
 
     Rigidbody rb;
-
-    CapsuleCollider caps;
 
     GameObject theDest;
 
@@ -49,11 +48,6 @@ public class player2 : MonoBehaviour
 
         rb.constraints = RigidbodyConstraints.FreezeRotation;
 
-        caps = GetComponent<CapsuleCollider>();
-        caps.center = new Vector3(0, 0.76f, 0);
-        caps.radius = 0.23f;
-        caps.height = 1.5f;
-
         this.aud = GetComponent<AudioSource>();
 
     }
@@ -62,12 +56,22 @@ public class player2 : MonoBehaviour
     void Update()
     {
         
-            float x = Input.GetAxisRaw("Horizontal2") * Time.deltaTime * speed;
-            float z = Input.GetAxisRaw("Vertical2") * Time.deltaTime * speed;
+         float x = Input.GetAxisRaw("Horizontal2") * Time.deltaTime * speed;
+         float z = Input.GetAxisRaw("Vertical2") * Time.deltaTime * speed;
+
+       if(Input.GetAxis("Horizontal2") == -1 || Input.GetAxis("Horizontal2") == 1 || Input.GetAxis("Vertical2") == -1 || Input.GetAxis("Vertical2") == 1)
+       {
+            this.animator.SetBool(key_isRun, true);
+            this.animator.SetBool(key_isWait, false);
+       }
+        else
+        {
+            this.animator.SetBool(key_isWait, true);
+        }
 
 
-            //前移動のときだけ方向転換させる
-            if (z > 0)
+        //前移動のときだけ方向転換させる
+        if (z > 0)
             {
                 transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, cam.eulerAngles.y, transform.rotation.z));
             }
@@ -79,10 +83,14 @@ public class player2 : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Joystick1Button1)&&isJumping==false)
         {
             this.rb.AddForce(transform.up * jumpForce);
-            this.animator.SetTrigger("isJump");
+            this.animator.SetBool(key_isJump,true);
             this.aud.PlayOneShot(this.jumpSE);
 
             isJumping = true;
+        }
+        else
+        {
+            this.animator.SetBool(key_isJump, false);
         }
 
         GameObject director = GameObject.Find("GameDirector");
@@ -132,6 +140,11 @@ public class player2 : MonoBehaviour
         {
             GameObject director = GameObject.Find("GameDirector");
             director.GetComponent<GameDirector>().WinLose2();
+            this.animator.SetBool(key_isDamaged, true);
+        }
+        else
+        {
+            this.animator.SetBool(key_isDamaged, false);
         }     
     }
 
