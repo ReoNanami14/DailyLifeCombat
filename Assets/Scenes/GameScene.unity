@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 21905593}
   - component: {fileID: 21905592}
   - component: {fileID: 21905598}
+  - component: {fileID: 21905599}
   m_Layer: 0
   m_Name: Smoke
   m_TagString: spItem
@@ -157,6 +158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smokePrehab: {fileID: 1273915125232972, guid: 73767e07adddc394d82b994801f89bbb,
     type: 3}
+  smokeSE: {fileID: 8300000, guid: 605ce52f307913346996636593c700cf, type: 3}
 --- !u!54 &21905593
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -267,14 +269,109 @@ MonoBehaviour:
   theDest2_sister: {fileID: 806731927}
   speed: 1500
   damage: 0.2
-  throwSE: {fileID: 8300000, guid: 687990b2a12cc4b6db34fdeceb9b8636, type: 3}
   damageSE: {fileID: 0}
+  throwSE: {fileID: 0}
   damagevoice: {fileID: 0}
   throwSE2: {fileID: 0}
-  damageSE2: {fileID: 0}
   damagevoice2: {fileID: 0}
   HTime: 2
   CountTime: 2
+--- !u!82 &21905599
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21905591}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &29249671
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,11 +522,10 @@ MonoBehaviour:
   theDest2_sister: {fileID: 806731927}
   speed: 1500
   damage: 0.5
-  throwSE: {fileID: 8300000, guid: 687990b2a12cc4b6db34fdeceb9b8636, type: 3}
   damageSE: {fileID: 8300000, guid: 74cdb21875d68fb449ee1d0582069774, type: 3}
+  throwSE: {fileID: 8300000, guid: 687990b2a12cc4b6db34fdeceb9b8636, type: 3}
   damagevoice: {fileID: 8300000, guid: 23e7ee0c4720c4bd48c405abb4ffa7f2, type: 3}
   throwSE2: {fileID: 8300000, guid: 7949c6e43f6c7b34fb2cbf00764847f4, type: 3}
-  damageSE2: {fileID: 8300000, guid: 74cdb21875d68fb449ee1d0582069774, type: 3}
   damagevoice2: {fileID: 8300000, guid: fb9e2837ca62dd64b9f421f03d19d2ba, type: 3}
   HTime: 5
   CountTime: 5
@@ -1353,11 +1449,10 @@ MonoBehaviour:
   theDest2_sister: {fileID: 806731927}
   speed: 1500
   damage: 0.3
-  throwSE: {fileID: 8300000, guid: 687990b2a12cc4b6db34fdeceb9b8636, type: 3}
   damageSE: {fileID: 8300000, guid: 74cdb21875d68fb449ee1d0582069774, type: 3}
+  throwSE: {fileID: 8300000, guid: 687990b2a12cc4b6db34fdeceb9b8636, type: 3}
   damagevoice: {fileID: 8300000, guid: 23e7ee0c4720c4bd48c405abb4ffa7f2, type: 3}
   throwSE2: {fileID: 8300000, guid: 7949c6e43f6c7b34fb2cbf00764847f4, type: 3}
-  damageSE2: {fileID: 8300000, guid: 74cdb21875d68fb449ee1d0582069774, type: 3}
   damagevoice2: {fileID: 8300000, guid: fb9e2837ca62dd64b9f421f03d19d2ba, type: 3}
   HTime: 3
   CountTime: 3
@@ -2991,8 +3086,8 @@ MonoBehaviour:
   speed: 4
   jumpForce: 4000
   Dest: {fileID: 323398910}
-  jumpSE: {fileID: 8300000, guid: 6ccbc3d284bd849d49fb1f8f94ab2888, type: 3}
-  holdSE: {fileID: 8300000, guid: eed2451bbd4264da8b6c27c92df62faf, type: 3}
+  jumpSE: {fileID: 8300000, guid: c5a8155a719d69a419ecc7ad05a55c80, type: 3}
+  holdSE: {fileID: 8300000, guid: 435fc5560653b624092cfdadf0fabf62, type: 3}
   distance: 1.5
   equipPosition: {fileID: 323398910}
   countText: {fileID: 353844463}
@@ -3108,8 +3203,9 @@ MonoBehaviour:
   speed: 4
   jumpForce: 4000
   Dest: {fileID: 323398910}
-  jumpSE: {fileID: 8300000, guid: 6ccbc3d284bd849d49fb1f8f94ab2888, type: 3}
-  holdSE: {fileID: 8300000, guid: eed2451bbd4264da8b6c27c92df62faf, type: 3}
+  jumpSE: {fileID: 8300000, guid: 4395fc426d1de1142b33caa743ad75be, type: 3}
+  holdSE: {fileID: 8300000, guid: 0047023df3eb81c49b61bb81eb3aa5f1, type: 3}
+  healSE: {fileID: 8300000, guid: 59c65b5678b49c344af640a639deaf86, type: 3}
   distance: 1.5
   equipPosition: {fileID: 323398910}
   countText: {fileID: 353844463}
@@ -3261,8 +3357,8 @@ MonoBehaviour:
   speed: 4
   jumpForce: 4000
   Dest: {fileID: 29249672}
-  jumpSE: {fileID: 8300000, guid: 6ccbc3d284bd849d49fb1f8f94ab2888, type: 3}
-  holdSE: {fileID: 8300000, guid: eed2451bbd4264da8b6c27c92df62faf, type: 3}
+  jumpSE: {fileID: 8300000, guid: 7949c6e43f6c7b34fb2cbf00764847f4, type: 3}
+  holdSE: {fileID: 8300000, guid: a2ca6d6c5f66fe441aba49af8b55dd22, type: 3}
   distance: 1.5
   equipPosition: {fileID: 29249672}
   countText: {fileID: 353844463}
@@ -3795,11 +3891,10 @@ MonoBehaviour:
   theDest2_sister: {fileID: 806731927}
   speed: 1500
   damage: 1
-  throwSE: {fileID: 8300000, guid: 687990b2a12cc4b6db34fdeceb9b8636, type: 3}
   damageSE: {fileID: 8300000, guid: 74cdb21875d68fb449ee1d0582069774, type: 3}
+  throwSE: {fileID: 8300000, guid: 687990b2a12cc4b6db34fdeceb9b8636, type: 3}
   damagevoice: {fileID: 8300000, guid: 23e7ee0c4720c4bd48c405abb4ffa7f2, type: 3}
   throwSE2: {fileID: 8300000, guid: 7949c6e43f6c7b34fb2cbf00764847f4, type: 3}
-  damageSE2: {fileID: 8300000, guid: 74cdb21875d68fb449ee1d0582069774, type: 3}
   damagevoice2: {fileID: 8300000, guid: fb9e2837ca62dd64b9f421f03d19d2ba, type: 3}
   HTime: 1
   CountTime: 1
@@ -4070,8 +4165,8 @@ MonoBehaviour:
   speed: 4
   jumpForce: 4000
   Dest: {fileID: 76713103928495661}
-  jumpSE: {fileID: 8300000, guid: 6ccbc3d284bd849d49fb1f8f94ab2888, type: 3}
-  holdSE: {fileID: 8300000, guid: eed2451bbd4264da8b6c27c92df62faf, type: 3}
+  jumpSE: {fileID: 8300000, guid: c5a8155a719d69a419ecc7ad05a55c80, type: 3}
+  holdSE: {fileID: 8300000, guid: 435fc5560653b624092cfdadf0fabf62, type: 3}
   distance: 1.5
   equipPosition: {fileID: 76713103928495661}
   countText: {fileID: 353844463}
@@ -4162,8 +4257,8 @@ MonoBehaviour:
   speed: 4
   jumpForce: 500
   cam: {fileID: 2134631969}
-  jumpSE: {fileID: 8300000, guid: 605ce52f307913346996636593c700cf, type: 3}
-  holdSE: {fileID: 8300000, guid: a2ca6d6c5f66fe441aba49af8b55dd22, type: 3}
+  jumpSE: {fileID: 8300000, guid: c5a8155a719d69a419ecc7ad05a55c80, type: 3}
+  holdSE: {fileID: 8300000, guid: 435fc5560653b624092cfdadf0fabf62, type: 3}
   distance: 1.5
   equipPosition: {fileID: 1257896669}
   holdTime: 5
@@ -4840,7 +4935,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1639548861}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e1e84a199bd67349b4e94d9c2f42a31, type: 3}
+  m_Script: {fileID: 11500000, guid: 0eb008bdc12dfd842a97f19936e2d875, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!82 &1639548863

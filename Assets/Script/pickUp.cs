@@ -22,12 +22,11 @@ public class pickUp : MonoBehaviour
     public float damage;
 
     //SE
-   // public AudioClip holdSE;
-    public AudioClip throwSE;
+    // public AudioClip holdSE;
     public AudioClip damageSE;
+    public AudioClip throwSE;
     public AudioClip damagevoice;
     public AudioClip throwSE2;
-    public AudioClip damageSE2;
     public AudioClip damagevoice2;
     AudioSource aud;
 
@@ -44,7 +43,6 @@ public class pickUp : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
 
-        //new
         this.aud = GetComponent<AudioSource>();
 
     }
@@ -107,7 +105,7 @@ public class pickUp : MonoBehaviour
                 this.hpGage2.GetComponent<Image>().fillAmount -= damage;
                 touch = false;
 
-                //this.aud.PlayOneShot(this.damageSE2);//ぶつかり音
+                this.aud.PlayOneShot(this.damageSE);//ぶつかり音
                // this.aud.PlayOneShot(this.damagevoice2);
             }
         }
@@ -119,7 +117,7 @@ public class pickUp : MonoBehaviour
                 this.hpGage.GetComponent<Image>().fillAmount -= damage;
                 touch2 = false;
 
-                //this.aud.PlayOneShot(this.damageSE);//ぶつかり音
+                this.aud.PlayOneShot(this.damageSE);//ぶつかり音
                 //this.aud.PlayOneShot(this.damagevoice);
             }
         }

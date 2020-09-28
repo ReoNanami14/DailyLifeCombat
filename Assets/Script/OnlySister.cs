@@ -27,6 +27,7 @@ public class OnlySister : MonoBehaviour
     public Transform Dest;
     public AudioClip jumpSE;
     public AudioClip holdSE;
+    public AudioClip healSE;
 
     public float distance; //Rayの距離
     public Transform equipPosition;
@@ -176,6 +177,7 @@ public class OnlySister : MonoBehaviour
         {
             this.hpGage2.GetComponent<Image>().fillAmount += 0.3f;
             isHeal = true;
+            this.aud.PlayOneShot(this.healSE);//回復音
         }
 
         if (isHeal)

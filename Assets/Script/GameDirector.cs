@@ -22,7 +22,6 @@ public class GameDirector : MonoBehaviour
     GameObject hpGage2;
     GameObject finish;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -88,6 +87,7 @@ public class GameDirector : MonoBehaviour
                 uiText.gameObject.SetActive(false);
             }
         }
+
     }
 
     public void WinLose()
@@ -99,7 +99,8 @@ public class GameDirector : MonoBehaviour
             this.finish.GetComponent<Text>().text = "Finish!!";
             uiText.gameObject.SetActive(false);
             Time.timeScale = 0;
-        }        
+        }
+
     }
 
     public void WinLose2()
@@ -112,6 +113,7 @@ public class GameDirector : MonoBehaviour
             uiText.gameObject.SetActive(false);
             Time.timeScale = 0;
         }
+
     }
 
     public void SisterSkill()
