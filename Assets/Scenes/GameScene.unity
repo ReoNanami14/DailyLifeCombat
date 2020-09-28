@@ -3958,6 +3958,7 @@ MonoBehaviour:
   cam: {fileID: 963194225}
   cam_brother: {fileID: 888382757}
   cam_sister: {fileID: 1768922434}
+  HealIcon: {fileID: 0}
 --- !u!82 &1362650085
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4282,6 +4283,7 @@ MonoBehaviour:
   cam: {fileID: 2134631965}
   cam_brother: {fileID: 137336252}
   cam_sister: {fileID: 2086549392}
+  HealIcon: {fileID: 0}
 --- !u!1 &1452640672
 GameObject:
   m_ObjectHideFlags: 0

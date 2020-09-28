@@ -10,6 +10,7 @@ public class CharacterChange : MonoBehaviour
     public GameObject cam;
     public GameObject cam_brother;
     public GameObject cam_sister;
+    public GameObject HealIcon;
 
     private void OnCollisionEnter(Collision other)
     {
