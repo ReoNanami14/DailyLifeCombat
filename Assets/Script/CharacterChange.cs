@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class CharacterChange : MonoBehaviour
@@ -10,7 +11,7 @@ public class CharacterChange : MonoBehaviour
     public GameObject cam;
     public GameObject cam_brother;
     public GameObject cam_sister;
-    public GameObject HealIcon;
+    public Image healIcon;
 
     private void OnCollisionEnter(Collision other)
     {
@@ -32,6 +33,7 @@ public class CharacterChange : MonoBehaviour
             cam.gameObject.SetActive(false);
             cam_sister.gameObject.SetActive(true);
             Destroy(other.gameObject);
+            healIcon.gameObject.SetActive(true);
         }
     }
 

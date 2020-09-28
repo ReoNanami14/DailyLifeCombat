@@ -47,6 +47,8 @@ public class OnlySister : MonoBehaviour
     GameObject hpGage2;
     float coolTime = 0.0f;
     bool isHeal=false;
+    public Image healIcon;
+    public Image unHeal;
 
     // Start is called before the first frame update
     void Start()
@@ -177,6 +179,8 @@ public class OnlySister : MonoBehaviour
         {
             this.hpGage2.GetComponent<Image>().fillAmount += 0.3f;
             isHeal = true;
+            healIcon.gameObject.SetActive(false);
+            unHeal.gameObject.SetActive(true);
             this.aud.PlayOneShot(this.healSE);//回復音
         }
 
@@ -188,6 +192,9 @@ public class OnlySister : MonoBehaviour
             {
                 isHeal = false;
                 coolTime = 0.0f;
+
+                unHeal.gameObject.SetActive(false);
+                healIcon.gameObject.SetActive(true);
             }
         }
 
