@@ -13,7 +13,7 @@ public class Smoke : MonoBehaviour
     {
         this.aud = GetComponent<AudioSource>();
 
-        if (collision.gameObject.CompareTag("player2"))
+        if (collision.gameObject.CompareTag("player1")|| collision.gameObject.CompareTag("player2"))
         {
             GameObject Smoke = Instantiate(smokePrehab, collision.transform.position, Quaternion.identity);
 

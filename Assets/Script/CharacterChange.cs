@@ -17,7 +17,7 @@ public class CharacterChange : MonoBehaviour
     {
         if (other.gameObject.CompareTag("otouto"))
         {
-            brother.transform.position = new Vector3(-2.78f, 5.47f, -3.21f);
+            brother.transform.position = new Vector3(-4.21f, 5.001f, -0.98f);
             brother.gameObject.SetActive(true);
             this.gameObject.SetActive(false);
             cam.gameObject.SetActive(false);
@@ -27,7 +27,7 @@ public class CharacterChange : MonoBehaviour
 
         if (other.gameObject.CompareTag("onechan"))
         {
-            sister.transform.position = new Vector3(-2.78f, 5.47f, -6.28f);
+            sister.transform.position = new Vector3(4.22f, 5.07f, -1.06f);
             sister.gameObject.SetActive(true);
             this.gameObject.SetActive(false);
             cam.gameObject.SetActive(false);

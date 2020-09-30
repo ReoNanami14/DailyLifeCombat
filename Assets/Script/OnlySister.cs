@@ -44,7 +44,6 @@ public class OnlySister : MonoBehaviour
 
     //スキルによる回復
     GameObject hpGage;
-    GameObject hpGage2;
     float coolTime = 0.0f;
     bool isHeal=false;
     public Image healIcon;
@@ -62,7 +61,7 @@ public class OnlySister : MonoBehaviour
 
         this.aud = GetComponent<AudioSource>();
 
-        this.hpGage2 = GameObject.Find("hpgage2");
+        this.hpGage = GameObject.Find("hpgage");
     }
 
     // Update is called once per frame
@@ -177,7 +176,7 @@ public class OnlySister : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q) && !isHeal)
         {
-            this.hpGage2.GetComponent<Image>().fillAmount += 0.3f;
+            this.hpGage.GetComponent<Image>().fillAmount += 0.3f;
             isHeal = true;
             healIcon.gameObject.SetActive(false);
             unHeal.gameObject.SetActive(true);

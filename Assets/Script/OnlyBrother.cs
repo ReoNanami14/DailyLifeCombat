@@ -17,7 +17,7 @@ public class OnlyBrother : MonoBehaviour
     //private const string key_isRunR = "isRunR";
     //private const string key_isRunL = "isRunL";
     private const string key_isWait = "isWait";
-    private const string key_isDamaged = "isDamaged";
+    //private const string key_isDamaged = "isDamaged";
 
     Rigidbody rb;
     AudioSource aud;
@@ -173,11 +173,11 @@ public class OnlyBrother : MonoBehaviour
         {
             GameObject director = GameObject.Find("GameDirector");
             director.GetComponent<GameDirector>().WinLose();
-            this.animator.SetBool(key_isDamaged, true);
+           // this.animator.SetBool(key_isDamaged, true);
         }
         else
         {
-            this.animator.SetBool(key_isDamaged, false);
+           // this.animator.SetBool(key_isDamaged, false);
         }
     }
 
