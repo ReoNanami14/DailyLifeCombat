@@ -11,12 +11,12 @@ public class player2 : MonoBehaviour
 
     private Animator animator;
 
-    private const string key_isRun = "isRun";
-    private const string key_isJump = "isJump";
-    //private const string key_isRunR = "isRunR";
-    //private const string key_isRunL = "isRunL";
-    private const string key_isWait = "isWait";
-    private const string key_isDamaged = "isDamaged";
+    //private const string key_isRun = "isRun";
+    //private const string key_isJump = "isJump";
+    ////private const string key_isRunR = "isRunR";
+    ////private const string key_isRunL = "isRunL";
+    //private const string key_isWait = "isWait";
+    //private const string key_isDamaged = "isDamaged";
 
     [SerializeField] Transform cam;
 
@@ -61,12 +61,12 @@ public class player2 : MonoBehaviour
 
        if(Input.GetAxis("Horizontal2") == -1 || Input.GetAxis("Horizontal2") == 1 || Input.GetAxis("Vertical2") == -1 || Input.GetAxis("Vertical2") == 1)
        {
-            this.animator.SetBool(key_isRun, true);
-            this.animator.SetBool(key_isWait, false);
+            //this.animator.SetBool(key_isRun, true);
+            //this.animator.SetBool(key_isWait, false);
        }
         else
         {
-            this.animator.SetBool(key_isWait, true);
+            //this.animator.SetBool(key_isWait, true);
         }
 
 
@@ -83,14 +83,14 @@ public class player2 : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Joystick1Button1)&&isJumping==false)
         {
             this.rb.AddForce(transform.up * jumpForce);
-            this.animator.SetBool(key_isJump,true);
+            //this.animator.SetBool(key_isJump,true);
             this.aud.PlayOneShot(this.jumpSE);
 
             isJumping = true;
         }
         else
         {
-            this.animator.SetBool(key_isJump, false);
+           // this.animator.SetBool(key_isJump, false);
         }
 
         GameObject director = GameObject.Find("GameDirector");
@@ -140,11 +140,11 @@ public class player2 : MonoBehaviour
         {
             GameObject director = GameObject.Find("GameDirector");
             director.GetComponent<GameDirector>().WinLose2();
-            this.animator.SetBool(key_isDamaged, true);
+            //this.animator.SetBool(key_isDamaged, true);
         }
         else
         {
-            this.animator.SetBool(key_isDamaged, false);
+           // this.animator.SetBool(key_isDamaged, false);
         }     
     }
 
