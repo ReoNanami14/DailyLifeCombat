@@ -225,9 +225,11 @@ public class OnlySister : MonoBehaviour
 
     private void CheckGrab()
     {
-        Ray ray = new Ray(transform.position + new Vector3(0, 0.15f, 0), transform.forward);
+        Ray ray = new Ray(transform.position + new Vector3(0, 0.13f, 0), transform.forward);
+        Ray ray2 = new Ray(transform.position + new Vector3(0, 1.3f, 0), transform.forward);
 
         RaycastHit hit;
+        RaycastHit hit2;
 
         if (Physics.Raycast(ray, out hit, distance))
         {
@@ -243,8 +245,6 @@ public class OnlySister : MonoBehaviour
                     count = hit.collider.gameObject.GetComponent<pickUp>().CountTime;
                 }
             }
-
-
         }
         else
         {
@@ -252,8 +252,32 @@ public class OnlySister : MonoBehaviour
 
         }
 
+        if (Physics.Raycast(ray2, out hit2, distance))
+        {
+            if (hit2.transform.CompareTag("item") || hit2.transform.CompareTag("spItem"))
+            {
+
+                currentItem = hit2.transform.gameObject;
+                canGrab = true;
+                holdTime = hit2.collider.gameObject.GetComponent<pickUp>().HTime;
+
+                if (!isCountdownStart)
+                {
+                    count = hit2.collider.gameObject.GetComponent<pickUp>().CountTime;
+                }
+            }
+
+        }
+        //else
+        //{
+        //    canGrab = false;
+
+        //}
+
+
         //Raycastの可視化
         Debug.DrawRay(ray.origin, ray.direction * distance, Color.red);
+        Debug.DrawRay(ray2.origin, ray2.direction * distance, Color.red);
     }
 
     //実際にアイテムを持つ
