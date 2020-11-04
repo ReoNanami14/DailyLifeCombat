@@ -187,7 +187,7 @@ public class OnlySister : MonoBehaviour
         {
             coolTime += Time.deltaTime;
 
-            if (coolTime >= 7.0)
+            if (coolTime >= 25.0)
             {
                 isHeal = false;
                 coolTime = 0.0f;
@@ -233,7 +233,7 @@ public class OnlySister : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, distance))
         {
-            if (hit.transform.CompareTag("item") || hit.transform.CompareTag("spItem"))
+            if (hit.transform.CompareTag("item"))
             {
 
                 currentItem = hit.transform.gameObject;
@@ -254,7 +254,7 @@ public class OnlySister : MonoBehaviour
 
         if (Physics.Raycast(ray2, out hit2, distance))
         {
-            if (hit2.transform.CompareTag("item") || hit2.transform.CompareTag("spItem"))
+            if (hit2.transform.CompareTag("item"))
             {
 
                 currentItem = hit2.transform.gameObject;

@@ -174,11 +174,11 @@ public class PlayerController : MonoBehaviour
         {
             GameObject director = GameObject.Find("GameDirector");
             director.GetComponent<GameDirector>().WinLose();
-            this.animator.SetBool(key_isDamaged, true);
+            //this.animator.SetBool(key_isDamaged, true);
         }
         else
         {
-            this.animator.SetBool(key_isDamaged, false);
+           // this.animator.SetBool(key_isDamaged, false);
         }
     }
 

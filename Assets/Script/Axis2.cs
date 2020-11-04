@@ -50,8 +50,7 @@ public class Axis2 : MonoBehaviour
         //Cameraの角度にマウスからとった値を入れる
         transform.eulerAngles += new Vector3(Input.GetAxis("Vertical1") * rotate_speed, Input.GetAxis("Horizontal1") * rotate_speed, 0);
 
-        //X軸の角度
-        float angleX = transform.eulerAngles.x;
+        //X軸の角度sw
 
         if (angleX >= 180)
         {

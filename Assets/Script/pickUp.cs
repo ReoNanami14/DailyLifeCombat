@@ -49,7 +49,7 @@ public class pickUp : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown("r")||Input.GetKeyDown(KeyCode.Joystick1Button2))
+        if (Input.GetKeyDown("r")||Input.GetKeyDown(KeyCode.Joystick2Button2))
         {
             this.rb.useGravity = true;
             this.rb.isKinematic=false;
@@ -60,6 +60,7 @@ public class pickUp : MonoBehaviour
         if (this.transform.position == theDest.position|| this.transform.position == theDest_brother.position|| this.transform.position == theDest_sister.position)
         {
             touch = true;
+
             if (Input.GetMouseButtonDown(0))
             {
                 this.transform.parent = null;
@@ -73,9 +74,10 @@ public class pickUp : MonoBehaviour
         }
 
         if (this.transform.position == theDest2.position || this.transform.position == theDest2_brother.position || this.transform.position == theDest2_sister.position)
-        {
+        {wwwwa
             touch2 = true;
-            if (Input.GetKeyDown(KeyCode.Joystick1Button15))
+
+            if (Input.GetKeyDown(KeyCode.Joystick2Button15))
             {
                 this.transform.parent = null;
                 this.rb.useGravity = true;
@@ -83,7 +85,7 @@ public class pickUp : MonoBehaviour
                 this.rb.AddForce(transform.forward * speed);
 
                 //投げるSE
-               // this.aud.PlayOneShot(this.throwSE2);
+                // this.aud.PlayOneShot(this.throwSE2);
             }
         }
 

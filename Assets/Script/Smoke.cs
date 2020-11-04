@@ -34,6 +34,8 @@ public class Smoke : MonoBehaviour
                 Smoke.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
 
                 this.aud.PlayOneShot(this.smokeSE);
+
+            this.transform.position = new Vector3(-0.033f, 1.02f, 0.681f);
             //}
         }
         else  touch = false; 

@@ -26,4 +26,5 @@ public class start : MonoBehaviour
         this.aud.PlayOneShot(this.startSE);
         SceneManager.LoadScene("GameScene");
     }
+
 }

@@ -91,7 +91,7 @@ public class OnlySister2 : MonoBehaviour
         transform.position += transform.forward * z + transform.right * x;
 
 
-        if (Input.GetKeyDown(KeyCode.Joystick1Button1) && isJumping == false)
+        if (Input.GetKeyDown(KeyCode.Joystick2Button1) && isJumping == false)
         {
             this.rb.AddForce(transform.up * jumpForce);
             this.animator.SetBool(key_isJump, true);
@@ -111,7 +111,7 @@ public class OnlySister2 : MonoBehaviour
 
         if (canGrab)
         {
-            if (Input.GetKeyDown(KeyCode.Joystick1Button0))
+            if (Input.GetKeyDown(KeyCode.Joystick2Button0))
             {
                 Invoke("PickUp", holdTime);
                 isCountdownStart = true;
@@ -143,7 +143,7 @@ public class OnlySister2 : MonoBehaviour
             isCountdownStart = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Joystick2Button15) && !isHeal)
+        if (Input.GetKeyDown(KeyCode.Joystick1Button15) && !isHeal)
         {
             this.hpGage2.GetComponent<Image>().fillAmount += 0.3f;
             isHeal = true;
@@ -156,7 +156,7 @@ public class OnlySister2 : MonoBehaviour
         {
             coolTime += Time.deltaTime;
 
-            if (coolTime >= 7.0)
+            if (coolTime >= 25.0)
             {
                 isHeal = false;
                 coolTime = 0.0f;
@@ -205,6 +205,7 @@ public class OnlySister2 : MonoBehaviour
                 currentItem = hit.transform.gameObject;
                 canGrab = true;
                 holdTime = hit.collider.gameObject.GetComponent<pickUp>().HTime;
+               // hit.collider.gameObject.GetComponent<BoxCollider>().enabled = false;
 
                 if (!isCountdownStart)
                 {

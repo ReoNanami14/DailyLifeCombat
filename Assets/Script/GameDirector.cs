@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Text))]
 public class GameDirector : MonoBehaviour
@@ -10,8 +11,18 @@ public class GameDirector : MonoBehaviour
     public Text uiText;
     public Text startCount;
     public GameObject pauseUI;
+    public GameObject retry;
+
+    //player1
     public PlayerController PC;
+    public OnlyBrother OnlyB;
+    public OnlySister OnlyS;
+
+    //player2
     public player2 P2;
+    public OnlyBrother2 OnlyB2;
+    public OnlySister2 OnlyS2;
+
     float currentTime;
 
     GameObject win;
@@ -48,7 +59,13 @@ public class GameDirector : MonoBehaviour
         if (currentTime <= 0.0f)
         {
             currentTime = 0.0f;
-            Time.timeScale = 0;
+            PC.enabled = false;
+            OnlyB.enabled = false;
+            OnlyS.enabled = false;
+            P2.enabled = false;
+            OnlyS2.enabled = false;
+            OnlyS2.enabled = false;
+            
         }
         int minutes = Mathf.FloorToInt(currentTime / 60F);
         int seconds = Mathf.FloorToInt(currentTime - minutes * 60);
@@ -65,12 +82,17 @@ public class GameDirector : MonoBehaviour
             else
                 Time.timeScale = 1f;
         }
+
+        TimeOver();
+        WinLose();
     }
 
     public void TimeOver()
     {
         if (currentTime <= 0.0f)
         {
+            retry.SetActive(true);
+
             if (hpGage.GetComponent<Image>().fillAmount > hpGage2.GetComponent<Image>().fillAmount)
             {
                 this.win.GetComponent<Text>().text = "You Win!!";
@@ -84,7 +106,7 @@ public class GameDirector : MonoBehaviour
             if(hpGage.GetComponent<Image>().fillAmount == hpGage2.GetComponent<Image>().fillAmount)
             {
                 this.finish.GetComponent<Text>().text = "DRAW!!";
-                uiText.gameObject.SetActive(false);
+                 uiText.gameObject.SetActive(false);
             }
         }
 
@@ -96,28 +118,38 @@ public class GameDirector : MonoBehaviour
         {
             this.win2.GetComponent<Text>().text = "You Win!!";
             this.lose2.GetComponent<Text>().text = "You Lose!!";
-            this.finish.GetComponent<Text>().text = "Finish!!";
+            this.finish.GetComponent<Text>().text = "FINISH!!";
             uiText.gameObject.SetActive(false);
-            Time.timeScale = 0;
+            retry.SetActive(true);
+
+            PC.enabled = false;
+            OnlyB.enabled = false;
+            OnlyS.enabled = false;
+            P2.enabled = false;
+            OnlyS2.enabled = false;
+            OnlyS2.enabled = false;
         }
 
     }
 
     public void WinLose2()
     {
-        if (this.hpGage2.GetComponent<Image>().fillAmount <= 0)
+        if (this.hpGage2.GetComponent<Image>().fillAmount <= 0.0f)
         {
             this.win.GetComponent<Text>().text = "You Win!!";
             this.lose.GetComponent<Text>().text = "You Lose!!";
             this.finish.GetComponent<Text>().text = "FINISH!!";
             uiText.gameObject.SetActive(false);
-            Time.timeScale = 0;
+            retry.SetActive(true);
+
+            PC.enabled = false;
+            OnlyB.enabled = false;
+            OnlyS.enabled = false;
+            P2.enabled = false;
+            OnlyS2.enabled = false;
+            OnlyS2.enabled = false;
+
         }
-
-    }
-
-    public void SisterSkill()
-    {
 
     }
 
@@ -155,5 +187,10 @@ public class GameDirector : MonoBehaviour
         yield return new WaitForSeconds(6.0f);
         currentTime -= Time.deltaTime;
 
+    }
+
+    public void Retry()
+    {
+        SceneManager.LoadScene("StartScene");
     }
 }
